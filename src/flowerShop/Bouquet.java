@@ -64,7 +64,7 @@ public class Bouquet {
         return BouquetCost;
     }
 
-    public void sortByFresh(){
+    public void sortByFresh(){                  //use comparator
         double bestFresh, nextFlowerFresh;
         Flower tempFlower;
 

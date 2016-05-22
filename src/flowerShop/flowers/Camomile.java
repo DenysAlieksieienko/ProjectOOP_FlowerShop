@@ -28,4 +28,5 @@ public class Camomile extends RealFlower {
                 ", Length "+getLength()+
                 ", Fresh "+getFresh()+"\n";
     }
+
 }

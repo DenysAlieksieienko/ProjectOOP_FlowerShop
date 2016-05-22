@@ -26,4 +26,5 @@ public class Rose extends RealFlower {
                ", Length "+getLength()+
                ", Fresh "+getFresh()+"\n";
     }
+
 }

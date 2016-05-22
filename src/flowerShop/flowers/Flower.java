@@ -3,7 +3,7 @@ package flowerShop.flowers;
 /**
  *
  */
-abstract public class Flower {
+abstract public class Flower implements Comparable<Flower>{
     private double price;
     private int length;
 

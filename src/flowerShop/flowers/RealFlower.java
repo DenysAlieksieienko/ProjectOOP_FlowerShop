@@ -3,8 +3,8 @@ package flowerShop.flowers;
 /**
  *
  */
-public class RealFlower extends Flower {
-    private double fresh;               // 1...10
+public abstract class RealFlower extends Flower {
+    private Double fresh;               // 1...10
 
     public RealFlower(double price, int length, double fresh) {
         super(price, length);
@@ -15,5 +15,13 @@ public class RealFlower extends Flower {
 
     public double getFresh() {
         return fresh;
+    }
+
+    @Override
+    public int compareTo(Flower flower) {
+        if (flower instanceof RealFlower){
+            return fresh.compareTo( ((RealFlower) flower).fresh);
+            //return ((RealFlower) flower).fresh.compareTo(fresh);
+        }else return 1;
     }
 }

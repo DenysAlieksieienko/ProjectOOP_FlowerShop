@@ -3,27 +3,26 @@ package flowerShop;
 import flowerShop.acsesuars.Acsesuar;
 import flowerShop.flowers.*;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 /**
  *
  */
 public class Bouquet {
     private Acsesuar[] acsesuars;
-    private Flower[] flowers;
+    private List<Flower> flowers;
     private double BouquetCost;
     private Random random=new Random();
 
-    public Bouquet(Acsesuar[] acsesuars, Flower[] flowers) {
+    public Bouquet(Acsesuar[] acsesuars,  List<Flower> flowers) {
         this.acsesuars = acsesuars;
         this.flowers = flowers;
     }
 
-    public Bouquet(Acsesuar[] acsesuarsForRandom, Flower[] flowersForRandom,
+    public Bouquet(Acsesuar[] acsesuarsForRandom, List<Flower> flowersForRandom,
                    int numbersOfAcsesuars, int numberOfFlowers) {
         acsesuars=new Acsesuar[numbersOfAcsesuars];
-        flowers=new Flower[numberOfFlowers];
+        flowers=new ArrayList<Flower>();
         int index;
 
         for (int i=0; i<numbersOfAcsesuars; i++){
@@ -32,8 +31,8 @@ public class Bouquet {
         }
 
         for(int i=0; i<numberOfFlowers; i++){
-            index=random.nextInt(flowersForRandom.length-1);
-            flowers[i]=flowersForRandom[index];
+            index=random.nextInt(flowersForRandom.size()-1);
+            flowers.add(flowersForRandom.get(index));
         }
     }
 
@@ -45,11 +44,11 @@ public class Bouquet {
         this.acsesuars = acsesuars;
     }
 
-    public Flower[] getFlowers() {
+    public List<Flower> getFlowers() {
         return flowers;
     }
 
-    public void setFlowers(Flower[] flowers) {
+    public void setFlowers(List<Flower> flowers) {
         this.flowers = flowers;
     }
 
@@ -58,52 +57,30 @@ public class Bouquet {
         for (int i=0; i<acsesuars.length; i++){
             BouquetCost +=acsesuars[i].getPrice();
         }
-        for(int i=0; i<flowers.length; i++){
-            BouquetCost +=flowers[i].getPrice();
+        for(int i=0; i<flowers.size(); i++){
+            BouquetCost +=flowers.get(i).getPrice();
         }
         return BouquetCost;
     }
 
     public void sortByFresh(){                  //use comparator
-        double bestFresh, nextFlowerFresh;
-        Flower tempFlower;
-
-        for(int i=0; i<flowers.length-1; i++){
-
-            if(flowers[i] instanceof RealFlower){
-                RealFlower rf = (RealFlower) flowers[i];
-                bestFresh = rf.getFresh();
-            } else bestFresh = -1.0;
-
-            for(int j=i+1; j<flowers.length; j++){				//find next more fresh flower
-                if(flowers[j] instanceof RealFlower){
-                    RealFlower rf = (RealFlower) flowers[j];
-                    nextFlowerFresh = rf.getFresh();
-                } else nextFlowerFresh = -1.0;
-
-                if(nextFlowerFresh>bestFresh) {
-                    tempFlower=flowers[i];                      //change
-                    flowers[i]=flowers[j];
-                    flowers[j]=tempFlower;
-                }
-            }
-        }
+        Collections.sort(flowers);
     }
 
     public void findFlower(int minLength, int maxLength){
         boolean isFlowerFind = false;
 
-        for(int i=0; i<flowers.length; i++){
-            if( minLength <= flowers[i].getLength() && flowers[i].getLength() <= maxLength ){
-                if(flowers[i] instanceof UnrealFlower){
-                    System.out.println(((UnrealFlower) flowers[i]).toString());
+        for(int i=0; i<flowers.size(); i++){
+            if( minLength <= flowers.get(i).getLength() && flowers.get(i).getLength() <= maxLength ){
+                if(flowers.get(i) instanceof UnrealFlower){
+                    System.out.println(((UnrealFlower) flowers.get(i)).toString());
                 }
-                if(flowers[i] instanceof Camomile){
-                    Camomile c = (Camomile) flowers[i];
+                if(flowers.get(i) instanceof Camomile){
+                    Camomile c = (Camomile) flowers.get(i);
                     System.out.println(c.toString());
                 }
-                if(flowers[i] instanceof Rose) {
-                    Rose r = (Rose) flowers[i];
+                if(flowers.get(i) instanceof Rose) {
+                    Rose r = (Rose) flowers.get(i);
                     System.out.println(r.toString());
                 }
                 isFlowerFind = true;
@@ -117,10 +94,10 @@ public class Bouquet {
         System.out.println("\t\t*****   Bouquet   *****");
         System.out.print("Acsesuars: "+Arrays.toString(acsesuars));
 
-        System.out.print("\nFlowers: "+flowers[0]);
+        System.out.print("\nFlowers: "+flowers.get(0));
 
-        for(int i=1;i<flowers.length;i++){
-            System.out.print("\t\t " + flowers[i]);
+        for(int i=1;i<flowers.size();i++){
+            System.out.print("\t\t " + flowers.get(i));
         }
         System.out.println("Coast: "+getBouquetCost());
         System.out.println("------------------------------------------------------------------");

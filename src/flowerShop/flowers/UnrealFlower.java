@@ -26,4 +26,8 @@ public class UnrealFlower extends Flower {
                ", Length "+getLength()+"\n";
     }
 
+    @Override
+    public int compareTo(Flower flower) {
+        return (flower instanceof RealFlower) ? -1:0;
+    }
 }

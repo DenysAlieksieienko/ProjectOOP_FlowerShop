@@ -1,6 +1,6 @@
 package flowerShop;
 
-import flowerShop.acsesuars.Acsesuar;
+import flowerShop.accessory.Accessory;
 import flowerShop.flowers.Flower;
 import flowerShop.flowers.Rose;
 import flowerShop.flowers.Camomile;
@@ -15,14 +15,12 @@ public class FlowerShop {
     public static void main(String[] args) {
         System.out.println("\t\t***** Cvetochnitca *****\n");
 
-        Acsesuar a1,a2,a3;
-        a1=new Acsesuar();
-        a2=new Acsesuar("Wood branch");
-        a3=new Acsesuar("Pearl");
+        ArrayList<Accessory> accessories =new ArrayList<Accessory>();
+        accessories.add(new Accessory());
+        accessories.add(new Accessory("Wood branch"));
+        accessories.add(new Accessory("Pearl"));
 
-        Acsesuar []	acsesuars = {a1, a2, a3};
         ArrayList<Flower> flowers=new ArrayList<Flower>();
-
         flowers.add(new Rose(15, 30, 4, true));
         flowers.add(new Rose(18, 35, 6, false));
         flowers.add(new Rose(20, 40, 7, true));
@@ -37,13 +35,13 @@ public class FlowerShop {
         flowers.add(new UnrealFlower(4.25, 22, "Caton"));
         flowers.add(new UnrealFlower(8.25, 22, "Capron"));
 
-        Bouquet b1=new Bouquet(acsesuars,flowers);
-        Bouquet b2=new Bouquet(acsesuars,flowers,3,4);
+        Bouquet b1=new Bouquet(accessories,flowers);
+        Bouquet b2=new Bouquet(accessories,flowers,3,4);
 
         b2.print();
         b2.sortByFresh();
         b2.print();
-        b2.findFlower(30,50);
+//        b2.findFlower(30,50);
 
     }
 }

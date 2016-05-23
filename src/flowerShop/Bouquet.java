@@ -1,6 +1,6 @@
 package flowerShop;
 
-import flowerShop.acsesuars.Acsesuar;
+import flowerShop.accessory.Accessory;
 import flowerShop.flowers.*;
 
 import java.util.*;
@@ -9,25 +9,25 @@ import java.util.*;
  *
  */
 public class Bouquet {
-    private Acsesuar[] acsesuars;
+    private List<Accessory> accessories;
     private List<Flower> flowers;
     private double BouquetCost;
     private Random random=new Random();
 
-    public Bouquet(Acsesuar[] acsesuars,  List<Flower> flowers) {
-        this.acsesuars = acsesuars;
+    public Bouquet(List<Accessory> accessories,  List<Flower> flowers) {
+        this.accessories = accessories;
         this.flowers = flowers;
     }
 
-    public Bouquet(Acsesuar[] acsesuarsForRandom, List<Flower> flowersForRandom,
+    public Bouquet(List<Accessory> acsesuarsForRandom, List<Flower> flowersForRandom,
                    int numbersOfAcsesuars, int numberOfFlowers) {
-        acsesuars=new Acsesuar[numbersOfAcsesuars];
+        accessories =new ArrayList<Accessory>();
         flowers=new ArrayList<Flower>();
         int index;
 
         for (int i=0; i<numbersOfAcsesuars; i++){
-            index=random.nextInt(acsesuarsForRandom.length-1);
-            acsesuars[i]=acsesuarsForRandom[index];
+            index=random.nextInt(acsesuarsForRandom.size()-1);
+            accessories.add(acsesuarsForRandom.get(index));
         }
 
         for(int i=0; i<numberOfFlowers; i++){
@@ -36,12 +36,12 @@ public class Bouquet {
         }
     }
 
-    public Acsesuar[] getAcsesuars() {
-        return acsesuars;
+    public List<Accessory> getAccessories() {
+        return accessories;
     }
 
-    public void setAcsesuars(Acsesuar[] acsesuars) {
-        this.acsesuars = acsesuars;
+    public void setAccessories(List<Accessory> accessories) {
+        this.accessories = accessories;
     }
 
     public List<Flower> getFlowers() {
@@ -54,8 +54,8 @@ public class Bouquet {
 
     public double getBouquetCost(){
         BouquetCost =0.0;
-        for (int i=0; i<acsesuars.length; i++){
-            BouquetCost +=acsesuars[i].getPrice();
+        for (int i=0; i< accessories.size(); i++){
+            BouquetCost += accessories.get(i).getPrice();
         }
         for(int i=0; i<flowers.size(); i++){
             BouquetCost +=flowers.get(i).getPrice();
@@ -92,7 +92,10 @@ public class Bouquet {
 
     public void print(){
         System.out.println("\t\t*****   Bouquet   *****");
-        System.out.print("Acsesuars: "+Arrays.toString(acsesuars));
+        System.out.print("Acsesuars: ");
+        for (int i=0;i< accessories.size();i++){
+            System.out.print(accessories.get(i) + ((i == accessories.size() - 1) ? "" : ", "));
+        }
 
         System.out.print("\nFlowers: "+flowers.get(0));
 

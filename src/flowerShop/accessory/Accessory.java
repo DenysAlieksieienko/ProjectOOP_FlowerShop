@@ -1,29 +1,29 @@
-package flowerShop.acsesuars;
+package flowerShop.accessory;
 
 /**
- * Class Acsesuar
+ * Class Accessory
  */
-public class Acsesuar {
+public class Accessory {
     private String name;
     private double price;
 
-    //create free of charge acsesuar
-    public Acsesuar() {
+    //create free of charge accessory
+    public Accessory() {
         price=0;
-        name="Acsesuar";
+        name="Accessory";
     }
 
-    public Acsesuar(String name) {
+    public Accessory(String name) {
         this();
         this.name = name;
     }
 
-    public Acsesuar(double price) {
+    public Accessory(double price) {
         this();
         this.price = price;
     }
 
-    public Acsesuar(String name, double price) {
+    public Accessory(String name, double price) {
         this.name = name;
         this.price = price;
     }
